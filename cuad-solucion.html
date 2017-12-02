@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style> 
+		#box {
+		    position: absolute;
+		    width: 10%;
+		    height: 10%;
+		    background-color: coral;
+		    color: white;	
+		}
+		#elQueLee{
+			color:white;
+		}
+		#box2 {
+		    position: absolute;
+		    width: 33%;
+		    height: 33%;
+		    background-color: white;
+		    color: white;	
+			left:33%;
+			top:33%;
+		}
+
+
+	</style>
+</head>
+
+<body>
+
+
+
+	<div id="box">
+
+	  <center><h3 id="cuadTexto">cuadrito</h3></center>
+	</div>
+
+	<br><br><br><br><br><br>
+	<button onclick="mov()"> Mover </button>
+	<button onclick="reiniciar()"> Reiniciar </button>
+
+	<br><br><br><br><br><br><br><br><br>
+	<div id="box2">
+		<center>
+			<br><br><br> 
+			<h1 id="elQueLee"> puto el que lee </h1>
+		</center>
+	</div>
+
+	<script type="text/javascript">
+
+	//defino las variables globales que voy a necesitar
+
+		var cajita = document.getElementById('box');
+		var posicionHorizontal=0;
+		var posicionVertical=0;
+		var textoDentro = document.getElementById("cuadTexto"); 
+		var direccionHorizontal = 10;
+		var direccionVertical = 10;
+		var p=document.getElementById("elQueLee");
+
+		function mov(){
+			
+					
+				//este if evita que funcione mal al apretar el boton mas de una vez.			
+				if (posicionVertical == 0 && posicionHorizontal == 0){
+					//la funcion moverALaDerecha se ejecutara cada 50 milisegundos
+					intervalDerecha=setInterval(moverALaDerecha,50);
+				}
+
+
+
+		}
+
+
+		//Funciones de movimiento
+
+		function moverALaDerecha(){
+
+			//acumulo la posicion Horizontal
+			posicionHorizontal += 1;		
+			
+			//Le agrego la unidad de medida en pixeles
+			var posTexto= posicionHorizontal + "%";
+
+			//asigno el valor acumulado la propiedad left de la cajita
+			cajita.style.left= posTexto;
+
+
+			//si la posicion horizontal llega a 500 entra en el if
+			if (posicionHorizontal == 90){
+				
+				
+				//cambio el texto dentro de la cajita.
+				cuadTexto.innerText = "Yeahh!"
+
+
+				//comienzo el movimiento hacia abajo
+				intervalAbajo=setInterval(moverHaciaAbajo, 50);
+				
+				//detengo el interval de movimiento a la derecha
+				clearInterval(intervalDerecha);
+
+			}
+
+
+		}
+
+
+		function moverHaciaAbajo(){
+
+			//acumulo la posicion Vertical
+			posicionVertical += 1;		
+			
+			//Le agrego la unidad de medida en pixeles
+			var posTexto= posicionVertical + "%";
+
+			//asigno el valor acumulado la propiedad top de la cajita
+			cajita.style.top= posTexto;
+
+			//si la posicion Vertical llega a 500 entra en el if
+			if (posicionVertical == 90){
+				
+				//cambio el texto dentro de la cajita.
+				cuadTexto.innerText = "Una mas!!"
+
+
+				//comienzo el movimiento hacia la izquierda
+				intervalIzquierda=setInterval(moverALaIzquierda, 50);
+				
+				//detengo el interval de movimiento hacia abajo
+				clearInterval(intervalAbajo);
+			}		
+		}
+
+
+		function moverALaIzquierda(){
+
+			//acumulo la posicion Horizontal, esta vez restando
+			posicionHorizontal += -1;		
+			
+			//Le agrego la unidad de medida en pixeles
+			var posTexto= posicionHorizontal + "%";
+
+			//asigno el valor acumulado la propiedad left de la cajita
+			cajita.style.left= posTexto;
+
+
+			//si la posicion horizontal llega a 0 entra en el if
+			if (posicionHorizontal == 0){
+				
+				//cambio el texto dentro de la cajita.
+				cuadTexto.innerText = "Ya Casi!"
+
+
+				//comienzo el movimiento hacia arriba
+				intervalArriba=setInterval(moverHaciaArriba, 50);
+				
+				//detengo el interval de movimiento a la izquierda
+				clearInterval(intervalIzquierda);
+
+			}
+
+
+		}
+
+
+		function moverHaciaArriba(){
+
+			//acumulo la posicion Vertical, esta vez restando
+			posicionVertical += -1;		
+			
+			//Le agrego la unidad de medida en pixeles
+			var posTexto= posicionVertical + "%";
+
+			//asigno el valor acumulado la propiedad top de la cajita
+			cajita.style.top= posTexto;
+
+			//si la posicion Vertical llega a 500 entra en el if
+			if (posicionVertical == 0){
+				
+				//cambio el texto dentro de la cajita.
+				cuadTexto.innerText = "Wiiii!!!!"
+
+
+				//comienzo el movimiento hacia la izquierda
+				intervalDerecha=setInterval(moverALaDerecha, 50);
+				
+				//detengo el interval de movimiento hacia arriba
+				clearInterval(intervalArriba);
+
+				tr=setInterval(textoRojo, 300);
+				tn=setInterval(textoNegro,500);
+				ta=setInterval(textoAzul, 700);	
+
+			}		
+		}
+
+
+		function reiniciar(){
+			
+			;	
+			//es complicado determinar que intervalo parar, asique paro todos del 1 al 100. 
+			for (var i = 100 ; i > 0; i--) {
+				clearInterval(i);
+			}
+			//Vuelvo a los valores iniciales
+			posicionHorizontal=0;
+			posicionVertical=0;
+			cajita.style.left="0%";
+			cajita.style.top="0%";
+			document.getElementById("elQueLee").style.color="white";
+			document.getElementById("box2").style.backgroundColor="white";
+
+
+		}
+
+		function textoRojo(){
+			document.getElementById("elQueLee").style.color="red";
+			document.getElementById("box2").style.backgroundColor="black";
+		}
+
+		function textoNegro(){
+			document.getElementById("elQueLee").style.color="black";
+			document.getElementById("box2").style.backgroundColor="Yellow";	
+		}
+
+
+		function textoAzul(){
+			document.getElementById("elQueLee").style.color="blue";
+			document.getElementById("box2").style.backgroundColor="green";
+		}
+
+
+
+
+	</script>
+
+</body>
+</html>
